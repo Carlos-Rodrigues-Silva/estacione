@@ -1,0 +1,12 @@
+<div class="mt-4">
+    <app-cesta-sumario [eUmaCesta]=false [itens]="(cesta$ | async).itens"></app-cesta-sumario>
+</div>
+
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+    <button class="btn btn-outline-primary" routerLink="/cesta">
+        <i class="fa fa-angle-left"></i> Voltar para a cesta de compras
+    </button>
+    <button class="btn btn-primary" (click)="criarIntencaoPagamento()">
+        Ir para pagamento <i class="fa fa-angle-right"></i>
+    </button>
+</div>

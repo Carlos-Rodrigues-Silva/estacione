@@ -1,0 +1,10 @@
+[
+  {
+    "TipoLogradouro": "Rua",
+    "EnderecoId": 1
+  },
+  {
+    "TipoLogradouro": "Avenida",
+    "EnderecoId": 2
+  }
+]

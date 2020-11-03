@@ -1,0 +1,22 @@
+<div class="bg-light px-4 py-3 text-uppercase font-weight-bold" style="padding: 1.20em;">
+    Resumo do pedido
+</div>
+<div class="p-4">
+    <p class="font-italic mb-4">Custos de frete ou adicionais serão adicionados durante o checkout de sua compra</p>
+    <ul class="list-unstyled mb-4" *ngIf="(totalCesta$ | async)">
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Frete e gerenciamento</strong>
+            <strong>R{{(totalCesta$ | async).frete | currency}}</strong>
+        </li>
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Subtotal</strong>
+            <!-- <strong>{{(totalCesta$ | async).subtotal | currency}}</strong> -->
+            <strong>{{(total | currency)}}</strong>
+        </li>      
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Total</strong>
+            <!-- <strong>{{(totalCesta$ | async).total | currency}}</strong> -->
+            <strong>{{total | currency}}</strong>
+        </li>
+    </ul>
+</div>

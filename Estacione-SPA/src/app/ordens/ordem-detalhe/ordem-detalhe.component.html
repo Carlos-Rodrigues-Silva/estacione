@@ -1,0 +1,17 @@
+<div class="container mt-5">
+    <div class="row" *ngIf="ordem">
+        <div class="col-8">
+            <app-cesta-sumario
+                [itens]="ordem.vagasOrdenadas"
+                [eUmaCesta]="false"
+            >
+            </app-cesta-sumario>
+        </div>
+        <div class="col-4">
+                <app-total-ordem
+                  [total]="ordem.total"
+                >
+                </app-total-ordem>
+        </div>
+    </div>
+</div>

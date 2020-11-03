@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-4">
+        <img src="./assets/imagens/parkauto.png">
+    </div>
+    <div class="col-4">
+        <p>{{estacionamento.nomeEstacionamento}}</p>
+        <p>{{estacionamento.formattedAddress}}, {{estacionamento.numero}}</p>
+        <!-- <a href="https://www.google.com" class="alugar">Alugar Agora</a> -->
+        <button (click)="AddItemCestaCompras()" type="button" class="alugar">Alugar Agora</button>
+    </div>
+    <div class="col-4">
+        <p>R$ {{estacionamento.precoHora}}</p>
+        <a href="#">Detalhes</a>
+    </div>
+</div>

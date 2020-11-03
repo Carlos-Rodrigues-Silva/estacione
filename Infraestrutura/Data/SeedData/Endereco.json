@@ -1,0 +1,20 @@
+[
+  {
+    "NomeLogradouro": "Ady Lobo Sotto Maior",
+    "Numero": "175",
+    "Cep": "82990-211",
+    "Bairro": "Cajuru",
+    "Cidade": "Curitiba",
+    "Estado": "Paraná",
+    "EstacionamentoId": 1
+  },
+  {
+    "NomeLogradouro": "Avenida Paulista",
+    "Numero": "1745",
+    "Cep": "01311-929",
+    "Bairro": "Bela Vista",
+    "Cidade": "São Paulo",
+    "Estado": "São Paulo",
+    "EstacionamentoId": 2
+  }
+]

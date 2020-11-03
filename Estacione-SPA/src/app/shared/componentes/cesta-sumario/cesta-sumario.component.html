@@ -1,0 +1,75 @@
+<!-- <ng-container *ngIf="cesta$ | async"> -->
+<ng-container *ngIf="itens.length > 0">
+    <div class="table responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <!-- <th class="border-0" [class.bg-light]="eUmaCesta" scope="col">
+                        <div class="p-2 px text-uppercase">Estacionamento</div>
+                    </th>
+                    <th scope="col" class="border-0" [class.bg-light]="eUmaCesta">
+                        <div class="py-2 text-uppercase">Preço</div>
+                    </th>
+                    <th scope="col" class="border-0" [class.bg-light]="eUmaCesta">
+                        <div class="py-2 text-uppercase">Quantidade</div>
+                    </th>
+                    <th scope="col" class="border-0" [class.bg-light]="eUmaCesta">
+                        <div class="py-2 text-uppercase">Total</div>
+                    </th>
+                    <th *ngIf="eUmaCesta" scope="col" class="border-0" [class.bg-light]="eUmaCesta">
+                        <div class="py-2 text-uppercase">Remover</div>
+                    </th> -->
+
+                    <th class="border-0" scope="col">
+                        <div class="p-2 px text-uppercase">Estacionamento</div>
+                    </th>
+                    <th scope="col" class="border-0">
+                        <div class="py-2 text-uppercase">Preço</div>
+                    </th>
+                    <th scope="col" class="border-0">
+                        <div class="py-2 text-uppercase">Quantidade</div>
+                    </th>
+                    <th scope="col" class="border-0">
+                        <div class="py-2 text-uppercase">Total</div>
+                    </th>
+                    <th *ngIf="eUmaCesta" scope="col" class="border-0">
+                        <div class="py-2 text-uppercase">Remover</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr *ngFor="let item of (cesta$ | async).itens"> -->
+                <tr *ngFor="let item of itens">
+                    <th scope="row">
+                        <div class="p-2">
+                            <img src="./assets/imagens/parkauto.png" alt="" class="img-fluid" style="max-height: 50px;">
+                            <div class="ml-3 d-inline-block align-middle">
+                                <h5 class="class mb-0">
+                                    <a routerLink="/mapaendereco/{{item.id}}" class="text-dark">{{item.nomeEstacionamento}}</a>
+                                </h5>
+                                <!-- <span class="text-muted font-weight-normal font-italic d-block">
+                                    Tipo: {{item.preco}}
+                                </span> -->
+                            </div>  
+                        </div>
+                    </th>
+                    <td class="align-middle">R{{item.preco | currency}}</td>
+                    <td class="align-middle">
+                        <div class="d-flex align-items-center" [class.justify-content-center]="!eUmaCesta">
+                            <i *ngIf="eUmaCesta" (click)="decrementarQuantidadeItens(item)" class="fa fa-minus-circle text-warning mr-2" style="cursor: pointer; font-size: 2em;"></i>
+                            <span class="font-weight-bold" style="font-size: 1.5em;">{{item.quantidade}}</span>
+                            <i *ngIf="eUmaCesta" (click)="incrementarQuantidadeItens(item)"  class="fa fa-plus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em;"></i>
+                        </div> 
+                    </td>
+                    <td class="align-middle"><strong>R{{item.preco * item.quantidade | currency}}</strong></td>
+                    <td class="align-middle text-center">
+                        <a class="text-danger">
+                            <i *ngIf="eUmaCesta" (click)="removerItemCesta(item)" class="fa fa-trash" style="font-size: 2em;"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-container>
+

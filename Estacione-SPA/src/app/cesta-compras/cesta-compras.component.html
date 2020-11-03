@@ -1,0 +1,32 @@
+<div class="mt-2">
+    <div *ngIf="(cesta$ | async) === null">
+        <p>Sua cesta de compras não possui nenhum item</p>
+    </div>
+    
+    <div *ngIf="(cesta$ | async)" >
+        <div class="pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 py-5 mb-1">
+                        <app-cesta-sumario
+                        (decrementar)="decrementarQuantidadeItens($event)"
+                        (incrementar)="incrementarQuantidadeItens($event)"
+                        (remover)="removerItemCesta($event)"
+                        [itens]="(cesta$ | async).itens"
+                        ></app-cesta-sumario>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6 offset-6">
+                        <app-total-ordem [total]="(totalCesta$ | async).total"></app-total-ordem>
+                        <a routerLink="/checkout" class="btn btn-outline-primary py-2 btn-block">
+                            Seguir para o checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,18 @@
+[
+  {
+    "NomeEstacionamento": "Vila AutoPark",
+    "Descricao": "Localizado no bairro Cajuru",
+    "PrecoHora": 20.50,
+    "Avaliacao": 4.7,
+    "NumeroVagas": 150,
+    "NumeroVagasDisponiveis": 50
+  },
+  {
+    "NomeEstacionamento": "Belo Vista Estacionamento",
+    "Descricao": "Localizado no bairro Bela Vista",
+    "PrecoHora": 15.99,
+    "Avaliacao": 3.6,
+    "NumeroVagas": 130,
+    "NumeroVagasDisponiveis": 95
+  }
+]

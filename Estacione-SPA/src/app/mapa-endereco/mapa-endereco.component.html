@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row" style="background-color: blue; height: 515px;">
+        <div class="col-4" style="background-color: red;" >
+            <form [formGroup]="buscaForm" (ngSubmit)="buscarEnderecoEstacionamento()" class="form-inline justify-content-start mb-4 mt-2"  >
+                <input type="text" placeholder="Endereço ou Cep" class="mr-2 form-control mr-sm-2" formControlName="RuaOuCep">
+                <button type="submit" class="btn btn-success my-2 my-sm-0">Buscar</button>
+            </form>
+            <div>
+                <app-endereco *ngIf="latitudeLongitude" [estacionamento]="latitudeLongitude"></app-endereco>
+            </div>
+        </div>
+        <div class="col-8">
+            <agm-map *ngIf="latitudeLongitude" [latitude]="latitudeLongitude.latitude" [longitude]="latitudeLongitude.longitude" [zoom]="zoom">
+                <agm-marker [latitude]="latitudeLongitude.latitude" [longitude]="latitudeLongitude.longitude"></agm-marker>
+            </agm-map>
+        </div>
+    </div>
+</div>
