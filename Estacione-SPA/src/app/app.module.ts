@@ -25,9 +25,10 @@ import { CestaComprasModule } from './cesta-compras/cesta-compras.module';
 import { CheckoutModule } from './checkout/checkout.module';
 
 
+
 @NgModule({
   // Propriedade responsável por fornecer para todo o app uma lista de componentes e diretivas
-  // Componetes, diretivas, pipes que pertencem a esse módulo
+  // Componentes, diretivas, pipes que pertencem a esse módulo
   declarations: [
     AppComponent,
     // HomeComponent,
@@ -51,10 +52,10 @@ import { CheckoutModule } from './checkout/checkout.module';
     }),
     // FormsModule,
     CoreModule,
-    HomeModule,
+    HomeModule
     // MapaEnderecoModule,
     // CestaComprasModule,
-    // CheckoutModule
+    // CheckoutModule,
 
   ],
   // providers: [] todos os Services criados devem ser listados aqui

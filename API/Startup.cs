@@ -78,7 +78,8 @@ namespace API
 
             services.AddScoped<IOrdemService, OrdemService>();
 
-            services.AddIdentityServices();
+            services.AddIdentityServices(Configuration);
+            services.AddScoped<ITokenService, TokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,6 +96,7 @@ namespace API
 
             app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //Swagger - documentação de todos os métodos dos controladores utlizando o Swagger UI.

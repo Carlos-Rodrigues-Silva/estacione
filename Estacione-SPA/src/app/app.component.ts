@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CestaComprasService } from './cesta-compras/cesta-compras.service';
+import { ContaService } from './conta/conta.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,14 @@ import { CestaComprasService } from './cesta-compras/cesta-compras.service';
 export class AppComponent implements OnInit {
   title = 'Estacione-SPA';
 
-  constructor(private cestaComprasService: CestaComprasService) {}
+  constructor(private cestaComprasService: CestaComprasService, private contaService: ContaService) {}
 
   ngOnInit(): void {
+    this.carregarCestaDeCompras();
+    this.carregarUsuarioAtual();
+  }
+
+  carregarCestaDeCompras() {
     const cestaId = localStorage.getItem('basket_id');
     if (cestaId !== null) {
       this.cestaComprasService.getBasket(cestaId).subscribe(() => {
@@ -20,5 +26,14 @@ export class AppComponent implements OnInit {
         console.log(error);
       });
     }
+  }
+
+  carregarUsuarioAtual() {
+    const token = localStorage.getItem('token');
+    this.contaService.carregarUsuarioAtual(token).subscribe(() => {
+      console.log('Usuário carregado');
+    }, error => {
+      console.log(error);
+    });
   }
 }

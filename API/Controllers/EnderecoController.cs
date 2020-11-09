@@ -84,7 +84,9 @@ namespace API.Controllers
         [HttpGet("localizacao")]
         public async Task<ActionResult<RespostaEnderecoDto>> Localizacao()
         {
-            var localizacao = await _repositorioGenerico.ListarTodosAsync();
+            //var localizacao = await _repositorioGenerico.ListarTodosAsync();
+            var localizacao = await _unitOfWork.Repositorio<Core.Entidades.Location>().ListarTodosAsync();
+
 
             return Ok(localizacao);
         }

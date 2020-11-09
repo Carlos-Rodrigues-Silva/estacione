@@ -1,10 +1,15 @@
-﻿using Core.Dto;
+﻿using API.Extensions;
+using Core.Dto;
 using Core.Entidades;
+using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -14,36 +19,121 @@ namespace API.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ITokenService _tokenService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            //var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            //var usuario = await _userManager.FindByEmailAsync(email);
+
+            var usuario = await _userManager.EncontrarPeloEmailPeloClaimsPrinciple(HttpContext.User);
+
+            return new UserDto
+            {
+                DisplayName = usuario.DisplayName,
+                Email = usuario.Email,
+                Token = _tokenService.CriarToken(usuario)
+            };
+        }
+
+        [HttpGet("emailexiste")]
+        public async Task<ActionResult<bool>> CheckEmailExistAsync([FromQuery] string email)
+        {
+            return await _userManager.FindByEmailAsync(email) != null;
+        }
+
+        [Authorize]
+        [HttpGet("endereco")]
+        public async Task<ActionResult<EnderecoDto>> ObterEnderecousuario()
+        {
+            //var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            //var usuario = await _userManager.FindByEmailAsync(email);
+
+            var usuario = await _userManager.EncontrarUsuarioPeloClaimsPrincipleComEnderecoAsync(HttpContext.User);
+
+            //return usuario.Endereco;
+
+            return new EnderecoDto
+            {
+                Nome = usuario.Endereco.Nome,
+                Número = usuario.Endereco.Número,
+                TipoLogradouro = usuario.Endereco.TipoLogradouro,
+                Cep = usuario.Endereco.Cep,
+                Bairro = usuario.Endereco.Bairro,
+                Cidade = usuario.Endereco.Cidade,
+                Estado = usuario.Endereco.Estado,
+            };
+        }
+
+        [Authorize]
+        [HttpPut("endereco")]
+        public async Task<ActionResult<EnderecoDto>> AtualizarEnderecoUsuario([FromBody] EnderecoDto enderecoDto)
+        {
+            var usuario = await _userManager.EncontrarUsuarioPeloClaimsPrincipleComEnderecoAsync(HttpContext.User);
+
+            usuario.Endereco = new Core.Entidades.Identity.Endereco
+            {
+                Nome = enderecoDto.Nome,
+                Número = enderecoDto.Número,
+                TipoLogradouro = enderecoDto.TipoLogradouro,
+                Cep = enderecoDto.Cep,
+                Bairro = enderecoDto.Bairro,
+                Cidade = enderecoDto.Cidade,
+                Estado = enderecoDto.Estado,
+            };
+
+            var resultado = await _userManager.UpdateAsync(usuario);
+
+            if (resultado.Succeeded)
+            {
+                return Ok(
+                new EnderecoDto
+                {
+                    Nome = usuario.Endereco.Nome,
+                    Número = usuario.Endereco.Número,
+                    TipoLogradouro = usuario.Endereco.TipoLogradouro,
+                    Cep = usuario.Endereco.Cep,
+                    Bairro = usuario.Endereco.Bairro,
+                    Cidade = usuario.Endereco.Cidade,
+                    Estado = usuario.Endereco.Estado,
+                });
+            }
+
+            return BadRequest("Problema ao atualizar o usuário ");
         }
 
         [HttpPost("login")]
-        public async Task<UserDto> Login([FromBody] LoginDto loginDto)
+        public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto loginDto)
         {
             var usuarioExiste = await _userManager.FindByEmailAsync(loginDto.Email);
 
-            if (usuarioExiste == null) return null;
+            if (usuarioExiste == null) return BadRequest("Usuário não autorizado");
 
             var resultado = await _signInManager.CheckPasswordSignInAsync(usuarioExiste, loginDto.Senha, false);
 
-            if (!resultado.Succeeded) return null;
+            if (!resultado.Succeeded) return BadRequest("Usuário não autorizado");
 
             var usuario = new UserDto
             {
                 DisplayName = usuarioExiste.DisplayName,
                 Email = loginDto.Email,
-                Token = "Esse é o token do usuário"
+                Token = _tokenService.CriarToken(usuarioExiste)
             };
 
             return usuario;
         }
 
         [HttpPost("registrar")]
-        public async Task<UserDto> Registrar([FromBody] RegistrarDto registrarDto)
+        public async Task<ActionResult<UserDto>> Registrar([FromBody] RegistrarDto registrarDto)
         {
             //var usuarioExiste = _userManager.FindByEmailAsync(registrarDto.Email);
 
@@ -63,17 +153,15 @@ namespace API.Controllers
 
             if (!resultado.Succeeded)
             {
-                return null;
+                return BadRequest("Usuário não autorizado");
             }
 
             return new UserDto
             {
                 DisplayName = cadastarUsuario.DisplayName,
                 Email = cadastarUsuario.Email,
-                Token = "Token teste"
+                Token = _tokenService.CriarToken(cadastarUsuario)
             };
         }
-
-
     }
 }

@@ -7,6 +7,7 @@ import { StepperComponent } from './componentes/stepper/stepper.component';
 import { CestaSumarioComponent } from './componentes/cesta-sumario/cesta-sumario.component';
 import { RouterModule } from '@angular/router';
 import { TextInputComponent } from './componentes/text-input/text-input.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 
@@ -16,7 +17,8 @@ import { TextInputComponent } from './componentes/text-input/text-input.componen
     CommonModule,
     ReactiveFormsModule,
     CdkStepperModule,
-    RouterModule
+    RouterModule,
+    BsDropdownModule.forRoot()
   ],
   exports: [
     ReactiveFormsModule,
@@ -24,7 +26,8 @@ import { TextInputComponent } from './componentes/text-input/text-input.componen
     CdkStepperModule,
     StepperComponent,
     CestaSumarioComponent,
-    TextInputComponent
+    TextInputComponent,
+    BsDropdownModule
   ]
 })
 export class SharedModule { }
