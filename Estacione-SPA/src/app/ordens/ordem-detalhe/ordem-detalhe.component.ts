@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdensService } from '../ordens.service';
 import { ActivatedRoute } from '@angular/router';
 import { IOrdem } from 'src/app/shared/models/ordem';
+import { IOrdemParaRetornarDto } from 'src/app/shared/models/ordemParaRetornarDto';
 
 @Component({
   selector: 'app-ordem-detalhe',
@@ -10,7 +11,9 @@ import { IOrdem } from 'src/app/shared/models/ordem';
 })
 export class OrdemDetalheComponent implements OnInit {
 
-  ordem: IOrdem;
+  // ordem: IOrdem;
+  ordem: IOrdemParaRetornarDto;
+
 
   constructor(private ordens: OrdensService, private route: ActivatedRoute) { }
 
@@ -19,7 +22,7 @@ export class OrdemDetalheComponent implements OnInit {
   }
 
   obterOrdemId() {
-    this.ordens.obterOrdensId(+this.route.snapshot.paramMap.get('id')).subscribe((ordem: IOrdem) => {
+    this.ordens.obterOrdensId(+this.route.snapshot.paramMap.get('id')).subscribe((ordem: IOrdemParaRetornarDto) => {
       this.ordem = ordem;
       console.log(ordem);
     });

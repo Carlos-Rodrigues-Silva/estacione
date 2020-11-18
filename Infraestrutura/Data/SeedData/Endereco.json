@@ -16,5 +16,32 @@
     "Cidade": "São Paulo",
     "Estado": "São Paulo",
     "EstacionamentoId": 2
+  },
+  {
+    "NomeLogradouro": "Avenida Paulista",
+    "Numero": "1009",
+    "Cep": "01310-100",
+    "Bairro": "Jardim Paulista",
+    "Cidade": "São Paulo",
+    "Estado": "São Paulo",
+    "EstacionamentoId": 3
+  },
+  {
+    "NomeLogradouro": "Avenida Paulista",
+    "Numero": "436",
+    "Cep": "01310-000",
+    "Bairro": "Bela Vista",
+    "Cidade": "São Paulo",
+    "Estado": "São Paulo",
+    "EstacionamentoId": 4
+  },
+  {
+    "NomeLogradouro": "Avenida Paulista",
+    "Numero": "500",
+    "Cep": "01310-000",
+    "Bairro": "Bela Vista",
+    "Cidade": "São Paulo",
+    "Estado": "São Paulo",
+    "EstacionamentoId": 5
   }
 ]

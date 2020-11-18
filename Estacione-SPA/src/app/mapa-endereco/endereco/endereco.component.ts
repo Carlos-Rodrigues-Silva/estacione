@@ -9,17 +9,14 @@ import { CestaComprasService } from 'src/app/cesta-compras/cesta-compras.service
 })
 export class EnderecoComponent implements OnInit {
 
-  // Input que recebe valores pesquisados pelo cliente, e que é adicionado a cesta de compras.
-  @Input() estacionamento: IRespostaEnderecoDto;
+  @Input() estacionamento: IRespostaEnderecoDto[];
 
   constructor(private cestaComprasService: CestaComprasService) { }
 
   ngOnInit() {
   }
 
-  // Adicionar item a cesta de compras do cliente
   AddItemCestaCompras() {
-    this.cestaComprasService.addItemToBasket(this.estacionamento);
-    // console.log(this.estacionamento);
+    this.cestaComprasService.addItemToBasket(this.estacionamento[0]);
   }
 }

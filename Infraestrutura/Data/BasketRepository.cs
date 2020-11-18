@@ -11,24 +11,19 @@ namespace Infraestrutura.Data
 {
     public class BasketRepository : IBasketRepository
     {
-        // Funcionalidades do servidor Redis
         public readonly IDatabase _database;
-
 
         public BasketRepository(IConnectionMultiplexer redis)
         {
-            // Conexão com banco de dados do Redis
             _database = redis.GetDatabase();
 
         }
 
-        // Deletar cesta de compras do usuário
         public async Task<bool> DeleteBasketAsync(string basketId)
         {
             return await _database.KeyDeleteAsync(basketId);
         }
 
-        // Obter cesta de compras do usuário
         public async Task<CestaCliente> GetBasketAsync(string basketId)
         {
             var data = await _database.StringGetAsync(basketId);
@@ -37,15 +32,13 @@ namespace Infraestrutura.Data
 
         }
 
-        // Atualizar cesta de compras do usuário
-        // se ela não existir retornar uma nova cesta
-        public async Task<CestaCliente> UpdateBasketAsync(CestaCliente basket)
+        public async Task<CestaCliente> UpdateBasketAsync(CestaCliente cesta)
         {
-            var created = await _database.StringSetAsync(basket.Id, JsonConvert.SerializeObject(basket), TimeSpan.FromDays(30));
+            var criarOuAtualizarCesta = await _database.StringSetAsync(cesta.Id, JsonConvert.SerializeObject(cesta), TimeSpan.FromDays(30));
 
-            if (!created) return null;
+            if (!criarOuAtualizarCesta) return null;
 
-            return await GetBasketAsync(basket.Id);
+            return await GetBasketAsync(cesta.Id);
         }
     }
 }

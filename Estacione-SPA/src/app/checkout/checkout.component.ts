@@ -22,9 +22,6 @@ export class CheckoutComponent implements OnInit {
 
   criarFormCheckout() {
     this.checkoutForm = this.fb.group({
-      // reviewForm: this.fb.group({
-
-      // }),
       pagamentoForm: this.fb.group({
         nomeNoCartao: [null, Validators.required]
       })

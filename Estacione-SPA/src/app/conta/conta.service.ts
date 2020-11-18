@@ -11,13 +11,11 @@ import { IUsuario } from '../shared/models/usuario';
 })
 export class ContaService {
   baseUrl = environment.apiUrl;
-  // private usuarioAtualSource = new BehaviorSubject<IUsuario>(null);
   private usuarioAtualSource = new ReplaySubject<IUsuario>(1);
   usuarioAtual$ = this.usuarioAtualSource.asObservable();
 
   constructor(private http: HttpClient, private router: Router ) { }
-
-
+  
   login(values: any) {
     return this.http.post(this.baseUrl + 'account/login', values).pipe(
       map((usuario: IUsuario) => {
@@ -59,15 +57,11 @@ export class ContaService {
     headers = headers.set('Authorization', `Bearer ${token}`);
     return this.http.get(this.baseUrl + 'account', {headers}).pipe(
       map((usuario: IUsuario) => {
-        if(usuario) {
+        if (usuario) {
           localStorage.setItem('token', usuario.token);
           this.usuarioAtualSource.next(usuario);
         }
       })
     );
   }
-
-  // obterUsuarioAtual() {
-  //   return this.usuarioAtualSource.value;
-  // }
  }

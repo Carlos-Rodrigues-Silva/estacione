@@ -19,5 +19,7 @@ namespace Core.Entidades
         public string Numero { get; set; }
 
         public double PrecoHora { get; set; }
+        public string FotoEstacionamento { get; set; }
+
     }
 }

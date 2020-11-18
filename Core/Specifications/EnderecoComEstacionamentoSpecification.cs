@@ -7,7 +7,7 @@ namespace Core.Specifications
 {
     public class EnderecoComEstacionamentoSpecification : BaseSpecification<Endereco>
     {
-        public EnderecoComEstacionamentoSpecification(string RuaOuCep) : base(x => x.NomeLogradouro == RuaOuCep.ToLower() || x.Cep == RuaOuCep.ToLower())
+        public EnderecoComEstacionamentoSpecification(string RuaOuCep) : base(x => x.NomeLogradouro.ToLower() == RuaOuCep.ToLower() || x.Cep.ToLower() == RuaOuCep.ToLower())
         {
             AddInclude(x => x.Estacionamento);
         }

@@ -10,9 +10,9 @@ namespace Infraestrutura.Services
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public async Task<RespostaGoogleApi> ObterDadosEndereco(string RuaOuCep)
+        public async Task<RespostaGoogleApi> ObterDadosEndereco(string numero, string RuaOuCep)
         {
-            HttpResponseMessage response = await client.GetAsync($"https://maps.googleapis.com/maps/api/geocode/json?address={RuaOuCep}&key=AIzaSyCX_AvtVNCQdY8I_6Gxe6-YgqEo1vMEAqc");
+            HttpResponseMessage response = await client.GetAsync($"https://maps.googleapis.com/maps/api/geocode/json?address={numero}+{RuaOuCep}&key=AIzaSyCX_AvtVNCQdY8I_6Gxe6-YgqEo1vMEAqc");
 
             response.EnsureSuccessStatusCode();
 

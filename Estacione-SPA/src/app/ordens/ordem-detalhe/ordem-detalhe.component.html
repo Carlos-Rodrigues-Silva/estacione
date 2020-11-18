@@ -1,15 +1,48 @@
 <div class="container mt-5">
     <div class="row" *ngIf="ordem">
         <div class="col-8">
-            <app-cesta-sumario
-                [itens]="ordem.vagasOrdenadas"
-                [eUmaCesta]="false"
-            >
-            </app-cesta-sumario>
+            <div class="table responsive">
+                <table class="table">
+                    <thead class="border-0 py-2">
+                        <tr>
+                            <th class="border-0" scope="col">
+                                <div class="p-2 px text-uppercase">Estacionamento</div>
+                            </th>
+                            <th scope="col" class="border-0">
+                                <div class="py-2 text-uppercase">Preço</div>
+                            </th>
+                            <th scope="col" class="border-0">
+                                <div class="py-2 text-uppercase">Quantidade</div>
+                            </th>
+                            <th scope="col" class="border-0">
+                                <div class="py-2 text-uppercase">Total</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <div class="p-2">
+                                    <img src="./assets/imagens/parkauto.png" alt="" class="img-fluid" style="max-height: 50px;">
+                                    <div class="ml-3 d-inline-block align-middle">
+                                        <h5 class="class mb-0">
+                                            <a routerLink="/mapaendereco/{{ordem.id}}" class="text-dark">{{ordem.nomeEstacionamento}}</a>
+                                        </h5>
+                                    </div>  
+                                </div>
+                            </th>
+                            <th class="align-middle">R{{ordem.preco | currency}}</th>
+                            <th class="align-middle"> {{ordem.quantidade}}</th>
+                            <th class="align-middle"><strong>R{{ordem.preco * ordem.quantidade | currency}}</strong></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-4">
                 <app-total-ordem
                   [total]="ordem.total"
+                  [eUmaOrdem]="false"
                 >
                 </app-total-ordem>
         </div>

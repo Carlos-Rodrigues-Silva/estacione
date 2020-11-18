@@ -11,13 +11,13 @@ import { IOrdem } from '../../models/ordem';
 })
 export class TotalOrdemComponent implements OnInit {
   totalCesta$: Observable<ICestaTotal>;
-  // ordem: IOrdem;
   @Input() total: number;
-  // @Input() subtotal: number;
+  @Input() eUmaOrdem = false;
 
   constructor(private cestaComprasService: CestaComprasService) { }
 
   ngOnInit() {
     this.totalCesta$ = this.cestaComprasService.total$;
+    console.log(this.total);
   }
 }

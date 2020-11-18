@@ -17,15 +17,10 @@ namespace Infraestrutura.Data
         {
             try
             {
-                // Verificar se existe alguma informação no banco de dados
-                // se não existir entrar no bloco
                 if(!context.Estacionamentos.Any())
                 {
-                    // Ler arquivo Json com os dados para serem salvos no banco
                     string estacionamentoData = File.ReadAllText("../Infraestrutura/Data/SeedData/Estacionamento.json");
 
-                    // Transformar esse texto em um objeto
-                    //List<Estacionamento> estacionamento = JsonSerializer.Deserialize<List<Estacionamento>>(estacionamentoData);
                     List<Estacionamento> estacionamento = JsonConvert.DeserializeObject<List<Estacionamento>>(estacionamentoData);
 
 
@@ -37,18 +32,11 @@ namespace Infraestrutura.Data
                     await context.SaveChangesAsync();
                 }
 
-                // Verificar se existe alguma informação no banco de dados
-                // se não existir entrar no bloco
                 if (!context.Enderecos.Any())
                 {
-                    // Ler arquivo Json com os dados para serem salvos no banco
                     string enderecoData = File.ReadAllText("../Infraestrutura/Data/SeedData/Endereco.json");
 
-                    // Transformar esse texto em um objeto
-                    //List<Endereco> enderecos = JsonSerializer.Deserialize<List<Endereco>>(enderecoData);
                     List<Endereco> enderecos = JsonConvert.DeserializeObject<List<Endereco>>(enderecoData);
-
-
 
                     foreach (Endereco item in enderecos)
                     {
@@ -60,11 +48,8 @@ namespace Infraestrutura.Data
 
                 if (!context.Logradouros.Any())
                 {
-                    // Ler arquivo Json com os dados para serem salvos no banco
                     string logradouroData = File.ReadAllText("../Infraestrutura/Data/SeedData/Logradouro.json");
 
-                    // Transformar esse texto em um objeto
-                    //List<Logradouro> logradouros = JsonSerializer.Deserialize<List<Logradouro>>(logradouroData);
                     List<Logradouro> logradouros = JsonConvert.DeserializeObject<List<Logradouro>>(logradouroData);
 
 
@@ -78,11 +63,8 @@ namespace Infraestrutura.Data
 
                 if (!context.Locations.Any())
                 {
-                    // Ler arquivo Json com os dados para serem salvos no banco
                     string locationData = File.ReadAllText("../Infraestrutura/Data/SeedData/Location.json");
 
-                    // Transformar esse texto em um objeto
-                    //List<Location> locations = JsonSerializer.Deserialize<List<Location>>(locationData);
                     var locations = JsonConvert.DeserializeObject<List<Location>>(locationData);
 
                     foreach (Location item in locations)

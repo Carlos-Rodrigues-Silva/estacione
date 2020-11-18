@@ -1,7 +1,5 @@
-// Informações para criar uma ordem de compra
 export interface IOrdemParaSerCriada {
     cestaId: string;
-    email: string;
 }
 
 export interface IOrdem {

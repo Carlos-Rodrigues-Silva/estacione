@@ -7,6 +7,8 @@ namespace Core.Dto
 
     public class RespostaEnderecoDto
     {
+        public int Id { get; set; }
+
         public string FormattedAddress { get; set; }
 
         public float Latitude { get; set; }
@@ -20,6 +22,8 @@ namespace Core.Dto
         public string Numero { get; set; }
 
         public double PrecoHora { get; set; }
+
+        public string FotoEstacionamento { get; set; }
 
     }
 }

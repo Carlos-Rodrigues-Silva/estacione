@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IOrdemParaSerCriada } from '../shared/models/ordem';
 import { ICestaCliente } from '../shared/models/CestaCliente';
@@ -14,6 +14,11 @@ export class CheckoutService {
   constructor(private http: HttpClient) { }
 
   CriarOrdem(ordem: IOrdemParaSerCriada) {
-    return this.http.post(this.baseUrl + 'ordens', ordem);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+    return this.http.post(this.baseUrl + 'ordem', ordem, httpOptions);
   }
 }

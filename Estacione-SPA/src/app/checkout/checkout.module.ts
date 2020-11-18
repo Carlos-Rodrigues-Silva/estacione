@@ -16,6 +16,5 @@ import { CheckoutSucessoComponent } from './checkout-sucesso/checkout-sucesso.co
     CheckoutRoutingModule,
     SharedModule
   ]
-  // exports: [CheckoutModule]
 })
 export class CheckoutModule { }

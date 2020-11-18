@@ -1,25 +1,8 @@
-<!-- <ng-container *ngIf="cesta$ | async"> -->
 <ng-container *ngIf="itens.length > 0">
     <div class="table responsive">
         <table class="table">
-            <thead>
+            <thead [class.thead-light]="eUmaCesta || eUmaOrdem" class="border-0 py-2">
                 <tr>
-                    <!-- <th class="border-0" [class.bg-light]="eUmaCesta" scope="col">
-                        <div class="p-2 px text-uppercase">Estacionamento</div>
-                    </th>
-                    <th scope="col" class="border-0" [class.bg-light]="eUmaCesta">
-                        <div class="py-2 text-uppercase">Preço</div>
-                    </th>
-                    <th scope="col" class="border-0" [class.bg-light]="eUmaCesta">
-                        <div class="py-2 text-uppercase">Quantidade</div>
-                    </th>
-                    <th scope="col" class="border-0" [class.bg-light]="eUmaCesta">
-                        <div class="py-2 text-uppercase">Total</div>
-                    </th>
-                    <th *ngIf="eUmaCesta" scope="col" class="border-0" [class.bg-light]="eUmaCesta">
-                        <div class="py-2 text-uppercase">Remover</div>
-                    </th> -->
-
                     <th class="border-0" scope="col">
                         <div class="p-2 px text-uppercase">Estacionamento</div>
                     </th>
@@ -32,13 +15,12 @@
                     <th scope="col" class="border-0">
                         <div class="py-2 text-uppercase">Total</div>
                     </th>
-                    <th *ngIf="eUmaCesta" scope="col" class="border-0">
+                    <th *ngIf="!eUmaCesta" scope="col" class="border-0">
                         <div class="py-2 text-uppercase">Remover</div>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr *ngFor="let item of (cesta$ | async).itens"> -->
                 <tr *ngFor="let item of itens">
                     <th scope="row">
                         <div class="p-2">
@@ -47,9 +29,6 @@
                                 <h5 class="class mb-0">
                                     <a routerLink="/mapaendereco/{{item.id}}" class="text-dark">{{item.nomeEstacionamento}}</a>
                                 </h5>
-                                <!-- <span class="text-muted font-weight-normal font-italic d-block">
-                                    Tipo: {{item.preco}}
-                                </span> -->
                             </div>  
                         </div>
                     </th>
@@ -72,4 +51,5 @@
         </table>
     </div>
 </ng-container>
+
 

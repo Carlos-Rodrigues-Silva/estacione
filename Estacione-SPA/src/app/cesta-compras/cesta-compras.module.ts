@@ -13,6 +13,5 @@ import { SharedModule } from '../shared/shared.module';
     CestaComprasRoutingModule,
     SharedModule
   ],
-  // exports: [CestaComprasModule]
 })
 export class CestaComprasModule { }

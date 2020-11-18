@@ -10,10 +10,12 @@ namespace Core.Interfaces
 {
     public interface IRepositorioGenerico<T> where T : class
     {
-        // Obter todos os registros em uma lista
         Task<List<T>> ListarTodosAsync();
 
-        // Obter pelo id
+        Task<List<T>> ListarTodosAsync(ISpecification<T> specification);
+
+        Task<T> ObterEntidadePeloId(int id);
+
         Task<T> ObterEntidadeComSpec(ISpecification<T> specification);
 
         void Adicionar(T entidade);

@@ -23,6 +23,8 @@ export class CheckoutReviewComponent implements OnInit {
   criarIntencaoPagamento() {
     return this.cestaComprasService.criarIntencaoPagamento().subscribe((response: any) => {
       this.appStepper.next();
+    }, error => {
+      console.log(error);
     });
   }
 }

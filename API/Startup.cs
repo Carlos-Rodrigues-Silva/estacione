@@ -52,11 +52,7 @@ namespace API
             services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            // Permite que o servidor receba header, metódos da origem especificada
-            services.AddCors(options => options.AddPolicy("CorsPolicy", policy =>
-            {
-                policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
-            }));
+    
             services.AddHttpClient();
 
             services.AddScoped<IBasketRepository, BasketRepository>();
@@ -80,6 +76,15 @@ namespace API
 
             services.AddIdentityServices(Configuration);
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IPaymentService, PaymentService>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200").AllowCredentials();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,13 +98,13 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //Swagger - documentação de todos os métodos dos controladores utlizando o Swagger UI.
             app.UseSwagger();
             app.UseSwaggerUI(c => 
             { 

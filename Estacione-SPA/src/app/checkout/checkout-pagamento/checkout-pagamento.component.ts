@@ -2,7 +2,6 @@ import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, OnDestr
 import { FormGroup } from '@angular/forms';
 import { CestaComprasService } from 'src/app/cesta-compras/cesta-compras.service';
 import { CheckoutService } from '../checkout.service';
-// import { ToastrService } from 'ngx-toastr';
 import { ICestaCliente } from 'src/app/shared/models/CestaCliente';
 import { IOrdem } from 'src/app/shared/models/ordem';
 import { Router, NavigationExtras } from '@angular/router';
@@ -23,7 +22,6 @@ export class CheckoutPagamentoComponent implements AfterViewInit, OnDestroy {
   @ViewChild('cardExpiry', {static: true}) cardExpiryElemento: ElementRef;
   @ViewChild('cardCvc', {static: true}) cardCvcElemento: ElementRef;
 
-  //usar any pois stripe não é typescript e sim javascript
   stripe: any;
   cardNumber: any;
   cardExpiry: any;
@@ -32,11 +30,9 @@ export class CheckoutPagamentoComponent implements AfterViewInit, OnDestroy {
   cardHandler = this.onChange.bind(this);
 
 
-  // cesta$: Observable<ICestaCliente>;
 
   constructor(private cestaService: CestaComprasService,
               private checkoutService: CheckoutService,
-              /*private toastr: ToastrService*/
               private router: Router) { }
 
   ngAfterViewInit(): void {
@@ -70,12 +66,6 @@ export class CheckoutPagamentoComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  // ngOnInit() {
-  //   // this.cesta$ = this.cestaService.cesta$;
-  //   // const cestaAtual = this.cestaService.getCurrentBasketValue();
-  //   // console.log(cestaAtual.id + " Cesta atual de teste cara");
-  // }
-
   submitOrdem() {
     const cesta = this.cestaService.getCurrentBasketValue();
     const ordemParaSerCriada = this.obterOrdemParaSerCriada(cesta);
@@ -89,8 +79,7 @@ export class CheckoutPagamentoComponent implements AfterViewInit, OnDestroy {
         }
       }).then(result => {
         if (result.paymentIntent) {
-          // this.toastr.success('Ordem criada com sucesso');
-          this.cestaService.removerCestaLocal(cesta.id);
+          this.cestaService.deletarCesta(cesta);
           const navigationExtras: NavigationExtras = {state: ordem};
           this.router.navigate(['checkout/sucesso'], navigationExtras);
         } else {
@@ -98,7 +87,6 @@ export class CheckoutPagamentoComponent implements AfterViewInit, OnDestroy {
         }
       });
     }, error => {
-      // this.toastr.error(error.message);
       console.log(error);
     });
   }
@@ -106,10 +94,6 @@ export class CheckoutPagamentoComponent implements AfterViewInit, OnDestroy {
   private obterOrdemParaSerCriada(cesta: ICestaCliente) {
     return {
       cestaId: cesta.id,
-      email: 'carlos-rodrigues-silva@gmail.com'
     };
   }
-
-
-
 }

@@ -5,6 +5,6 @@ namespace Core.Interfaces
 {
     public interface IGoogleRespostaEndereco
     {
-        Task<RespostaGoogleApi> ObterDadosEndereco(string RuaOuCep);
+        Task<RespostaGoogleApi> ObterDadosEndereco(string RuaOuCep, string numero);
     }
 }

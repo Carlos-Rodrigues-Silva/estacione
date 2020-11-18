@@ -27,9 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.loginForm.value);
     this.contaService.login(this.loginForm.value).subscribe(() => {
-      // this.router.navigateByUrl('/mapaendereco');
       this.router.navigateByUrl(this.returnUrl);
       console.log('usuário logado');
     }, error => {

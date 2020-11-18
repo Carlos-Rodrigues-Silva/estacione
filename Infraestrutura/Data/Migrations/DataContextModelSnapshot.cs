@@ -89,6 +89,9 @@ namespace Infraestrutura.Data.Migrations
                     b.Property<string>("FormattedAddress")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("FotoEstacionamento")
+                        .HasColumnType("TEXT");
+
                     b.Property<float>("Latitude")
                         .HasColumnType("REAL");
 

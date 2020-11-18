@@ -26,6 +26,5 @@ namespace Core.Entidades
 
         public Logradouro Logradouro { get; set; }
 
-
     }
 }

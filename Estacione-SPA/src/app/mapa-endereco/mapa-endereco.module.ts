@@ -18,8 +18,5 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     }),
     ReactiveFormsModule
   ]
-  // não precisa mais expor o componente pq agora o MapaEnderecoModule é responsável 
-  // por carregar esse componente
-  // exports: [MapaEnderecoComponent]
 })
 export class MapaEnderecoModule { }

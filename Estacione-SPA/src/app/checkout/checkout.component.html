@@ -2,16 +2,9 @@
     <div class="row">
         <div class="col-8">
             <app-stepper [linearModeSelected]="false" #appStepper>
-                <!-- <cdk-step [label]="'Address'">
-                    Step 1
-                </cdk-step>
-                <cdk-step [label]="'Delivery'">
-                    Step 2
-                </cdk-step> -->
                 <cdk-step [label]="'Review'">
                     <app-checkout-review [appStepper]="appStepper"></app-checkout-review>
                 </cdk-step>
-                <!-- <cdk-step [label]="'Pagamento'" [checkoutForm]="checkoutForm"> -->
                 <cdk-step [label]="'Pagamento'">
                     <app-checkout-pagamento [checkoutForm]="checkoutForm"></app-checkout-pagamento>
                 </cdk-step>

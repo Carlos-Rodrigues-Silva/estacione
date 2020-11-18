@@ -27,15 +27,11 @@ namespace Infraestrutura.Services
         }
         public async Task<Ordem> CriarOrdemAsync(string emailComprador, string cestaId)
         {
-            // Obter cesta de compras
             CestaCliente cesta = await _basketRepository.GetBasketAsync(cestaId);
 
-            // Obter itens 
             var itens = new List<VagaAlugada>();
             foreach (BasketItem item in cesta.ItensCestaCliente)
             {
-                //Estacionamento estacionamento = await _dataContext.Estacionamentos.FindAsync(item.Id);
-                //Estacionamento estacionamento = await _context.Estacionamentos.Include(e => e.Endereco).FirstOrDefaultAsync(x => x.Id == item.Id);
                 var spec = new EstacionamentoComEnderecoSpecification(item.Id);
                 Estacionamento estacionamento = await _unitOfWork.Repositorio<Estacionamento>().ObterEntidadeComSpec(spec);
                 VagaOrdenada vagaOrdenada = new VagaOrdenada(estacionamento.NomeEstacionamento, estacionamento.Endereco.NomeLogradouro, estacionamento.Endereco.Numero, estacionamento.Endereco.Cep, estacionamento.Endereco.Bairro, estacionamento.Endereco.Cidade, estacionamento.Endereco.Estado);
@@ -43,36 +39,32 @@ namespace Infraestrutura.Services
                 itens.Add(vagaAlugada);
             }
 
-            // Calcular total
             var total = itens.Sum(ItensCestaCliente => ItensCestaCliente.Preco * ItensCestaCliente.Quantidade);
 
-            // verificar se a ordem já existe
-
-            // Criar ordem nova 
-            Ordem ordem = new Ordem(itens, emailComprador, total /*cestaCliente.PaymentIntentId*/);
+            Ordem ordem = new Ordem(itens, emailComprador, total);
             _unitOfWork.Repositorio<Ordem>().Adicionar(ordem);
 
-            // salvar no banco de dados
             var resultado = await _unitOfWork.Complete();
 
-            // Se o resultado for zero retornar null
             if (resultado <= 0) return null;
 
-            // Deletar cesta de compras (por que a ordem já foi retornada e salva)
             await _basketRepository.DeleteBasketAsync(cestaId);
 
-            //retorna nova ordem
             return ordem;
         }
 
-        public Task<Ordem> ObterOrdemPeloId(int id, string emailComprador)
+        public async Task<Ordem> ObterOrdemPeloId(int id, string emailComprador)
         {
-            throw new NotImplementedException();
+            var spec = new OrdemComVagasOrdenadasSpecification(id, emailComprador);
+
+;           return await _unitOfWork.Repositorio<Ordem>().ObterEntidadeComSpec(spec);
         }
 
-        public Task<IReadOnlyList<Ordem>> ObterOrdensAsync(string emailComprador)
+
+        public async Task<IReadOnlyList<Ordem>> ObterOrdensAsync(string emailComprador)
         {
-            throw new NotImplementedException();
+            var spec = new OrdemComVagasOrdenadasSpecification(emailComprador);
+            return await _unitOfWork.Repositorio<Ordem>().ListarTodosAsync(spec);
         }
     }
 }

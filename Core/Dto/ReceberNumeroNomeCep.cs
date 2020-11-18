@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Dto
 {
-    public class ReceberRuaOuNomeDto
+    public class ReceberNumeroNomeCep
     {
         public string RuaOuCep { get; set; }
     }

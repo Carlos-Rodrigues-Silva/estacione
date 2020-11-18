@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
@@ -32,9 +33,6 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            //var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
-            //var usuario = await _userManager.FindByEmailAsync(email);
-
             var usuario = await _userManager.EncontrarPeloEmailPeloClaimsPrinciple(HttpContext.User);
 
             return new UserDto
@@ -55,12 +53,7 @@ namespace API.Controllers
         [HttpGet("endereco")]
         public async Task<ActionResult<EnderecoDto>> ObterEnderecousuario()
         {
-            //var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
-            //var usuario = await _userManager.FindByEmailAsync(email);
-
             var usuario = await _userManager.EncontrarUsuarioPeloClaimsPrincipleComEnderecoAsync(HttpContext.User);
-
-            //return usuario.Endereco;
 
             return new EnderecoDto
             {
@@ -135,12 +128,6 @@ namespace API.Controllers
         [HttpPost("registrar")]
         public async Task<ActionResult<UserDto>> Registrar([FromBody] RegistrarDto registrarDto)
         {
-            //var usuarioExiste = _userManager.FindByEmailAsync(registrarDto.Email);
-
-            //if (usuarioExiste == null)
-            //{
-            //    return null;
-            //}
 
             var cadastarUsuario = new AppUser
             {

@@ -13,8 +13,7 @@ export class MapaEnderecoService {
 
   constructor(private http: HttpClient) { }
 
-  // Enviar endereço digitado pelo cliente
-  endereco(values: any): Observable<IRespostaEnderecoDto> {
-    return this.http.post<IRespostaEnderecoDto>(this.baseUrl + 'endereco/logradourooucep', values);
+  endereco(values: any): Observable<IRespostaEnderecoDto[]> {
+    return this.http.post<IRespostaEnderecoDto[]>(this.baseUrl + 'endereco/logradourooucep', values);
   }
 }

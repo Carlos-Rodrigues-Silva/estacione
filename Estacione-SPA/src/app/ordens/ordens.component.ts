@@ -23,8 +23,4 @@ export class OrdensComponent implements OnInit {
       console.log(error);
     });
   }
-
-  // obterOrdensPeloId() {
-  //   this.ordens.obterOrdensId()
-  // }
 }

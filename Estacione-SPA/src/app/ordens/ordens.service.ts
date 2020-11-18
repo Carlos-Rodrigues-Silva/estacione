@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,11 +12,24 @@ export class OrdensService {
   constructor(private http: HttpClient) { }
 
   obterOrdens() {
-    return this.http.get(this.baseUrl + 'ordens' + '/ordens');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+    return this.http.get(this.baseUrl + 'ordem' + '/ordens', httpOptions);
   }
+
+  // obterOrdensId(id: number) {
+  //   return this.http.get(this.baseUrl + 'ordem/ordem/' + id);
+  // }
 
   obterOrdensId(id: number) {
-    return this.http.get(this.baseUrl + 'ordens/ordem/' + id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+    return this.http.get(this.baseUrl + 'ordem/' + id, httpOptions);
   }
-
 }

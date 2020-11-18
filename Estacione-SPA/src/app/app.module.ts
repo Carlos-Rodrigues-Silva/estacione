@@ -27,43 +27,22 @@ import { CheckoutModule } from './checkout/checkout.module';
 
 
 @NgModule({
-  // Propriedade responsável por fornecer para todo o app uma lista de componentes e diretivas
-  // Componentes, diretivas, pipes que pertencem a esse módulo
+
   declarations: [
     AppComponent,
-    // HomeComponent,
-    // MapaEnderecoComponent,
-    // EnderecoComponent,
-    // CestaComprasComponent,
-    // CheckoutComponent,
-    // CheckoutReviewComponent,
-    // CheckoutPagamentoComponent,
-    // CheckoutSucessoComponent
   ],
-  // Lista de outros módulos no qual esse módulo é dependente
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    // ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCX_AvtVNCQdY8I_6Gxe6-YgqEo1vMEAqc'
     }),
-    // FormsModule,
     CoreModule,
     HomeModule
-    // MapaEnderecoModule,
-    // CestaComprasModule,
-    // CheckoutModule,
-
   ],
-  // providers: [] todos os Services criados devem ser listados aqui
-  
-  // Services criados podem ser listados aqui para serem acessados por todo o app. Mas o
-  // melhor é usar depedency injection e adicionar o services no construtor dos componentes
   providers: [],
-  // Lista qual componente deve ser iniciado ao rodar a aplicação
   bootstrap: [AppComponent]
 })
 export class AppModule { }

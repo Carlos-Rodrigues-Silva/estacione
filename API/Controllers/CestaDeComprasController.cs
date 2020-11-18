@@ -1,4 +1,5 @@
-﻿using Core.Entidades;
+﻿using Core.Dto;
+using Core.Entidades;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -12,11 +13,11 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BasketController : ControllerBase
+    public class CestaDeComprasController : ControllerBase
     {
         private readonly IBasketRepository _basketRepository;
 
-        public BasketController(IBasketRepository basketRepository)
+        public CestaDeComprasController(IBasketRepository basketRepository)
         {
             _basketRepository = basketRepository;
         }
@@ -29,13 +30,20 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CestaCliente>> UpdateBasket(CestaCliente basket)
+        public async Task<ActionResult<CestaCliente>> UpdateBasket(CestaClienteDto cesta)
         {
-            CestaCliente updatedBasket = await _basketRepository.UpdateBasketAsync(basket);
+            var cestaCliente = new CestaCliente
+            {
+                Id = cesta.Id,
+                ItensCestaCliente = cesta.ItensCestaCliente,
+                ClientSecret = cesta.ClientSecret,
+                PaymentIntentId = cesta.PaymentIntentId
+            };
+
+            CestaCliente updatedBasket = await _basketRepository.UpdateBasketAsync(cestaCliente);
 
             return Ok(updatedBasket);
         }
-
 
         [HttpDelete]
         public async Task DeleteBasketAsync(string id)

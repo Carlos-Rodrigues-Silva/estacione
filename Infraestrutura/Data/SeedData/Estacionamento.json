@@ -14,5 +14,29 @@
     "Avaliacao": 3.6,
     "NumeroVagas": 130,
     "NumeroVagasDisponiveis": 95
+  },
+  {
+    "NomeEstacionamento": "Estacionamento Paulista ltda",
+    "Descricao": "Localizado no bairro Jardim Paulista",
+    "PrecoHora": 15.99,
+    "Avaliacao": 5,
+    "NumeroVagas": 50,
+    "NumeroVagasDisponiveis": 30
+  },
+  {
+    "NomeEstacionamento": "Estacionamento",
+    "Descricao": "Localizado no bairro Bela Vista",
+    "PrecoHora": 25,
+    "Avaliacao": 4.9,
+    "NumeroVagas": 65,
+    "NumeroVagasDisponiveis": 25
+  },
+  {
+    "NomeEstacionamento": "Estapar Paulista 500",
+    "Descricao": "Localizado no bairro Bela Vista",
+    "PrecoHora": 29.90,
+    "Avaliacao": 2.5,
+    "NumeroVagas": 80,
+    "NumeroVagasDisponiveis": 5
   }
 ]

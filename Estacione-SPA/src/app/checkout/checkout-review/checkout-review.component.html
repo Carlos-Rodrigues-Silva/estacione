@@ -1,5 +1,9 @@
 <div class="mt-4">
-    <app-cesta-sumario [eUmaCesta]=false [itens]="(cesta$ | async).itens"></app-cesta-sumario>
+    <app-cesta-sumario 
+            [eUmaCesta]=false 
+            [itens]="(cesta$ | async).itensCestaCliente"
+            >
+    </app-cesta-sumario>
 </div>
 
 <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">

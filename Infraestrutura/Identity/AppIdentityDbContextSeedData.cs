@@ -17,18 +17,18 @@ namespace Infraestrutura.Identity
             {
                 var usuario = new AppUser
                 {
-                    DisplayName = "Carlos Rodrigues",
-                    Email = "carlos@email.com",
-                    UserName = "carlos@email.com",
+                    DisplayName = "Teste",
+                    Email = "teste@teste.com",
+                    UserName = "teste@teste.com",
                     Endereco = new Core.Entidades.Identity.Endereco
                     {
-                        Nome = "Ady Lobo Sotto Maior",
-                        Número = "175",
+                        Nome = "teste",
+                        Número = "1",
                         TipoLogradouro = "Rua",
-                        Cep = "82990-211",
-                        Bairro = "Cajuru",
-                        Cidade = "Curitiba",
-                        Estado = "Paraná"
+                        Cep = "00000-000",
+                        Bairro = "teste",
+                        Cidade = "teste",
+                        Estado = "teste"
                     }
                 };
 

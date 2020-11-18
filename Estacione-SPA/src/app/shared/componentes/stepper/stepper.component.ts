@@ -13,10 +13,7 @@ export class StepperComponent extends CdkStepper implements OnInit {
   ngOnInit() {
     this.linear = this.linearModeSelected;
   }
-
-  // Qual passo nós estamos
   onClick(index: number) {
     this.selectedIndex = index;
-    // console.log(this.selectedIndex);
   }
 }

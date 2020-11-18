@@ -9,13 +9,10 @@ namespace Core.Interfaces
 {
     public interface IBasketRepository
     {
-        // Obter cesta de itens do usuário
         Task<CestaCliente> GetBasketAsync(string basketId);
 
-        // Criar ou atualizar cesta de itens do usuário
         Task<CestaCliente> UpdateBasketAsync(CestaCliente basket);
 
-        // Deletar item de cesta do usuário
         Task<bool> DeleteBasketAsync(string basketId);
     }
 }

@@ -20,11 +20,7 @@ namespace Infraestrutura.Data
 
         public DbSet<Ordem> Ordens { get; set; }
 
-
-        //public DbSet<VagaOrdenada> VagasOrdenadas { get; set; }
-
         public DbSet<VagaAlugada> VagaAlugadas { get; set; }
-
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 

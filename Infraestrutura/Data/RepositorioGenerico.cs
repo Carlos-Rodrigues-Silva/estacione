@@ -24,6 +24,11 @@ namespace Infraestrutura.Data
             return await _dataContext.Set<T>().ToListAsync();
         }
 
+        public async Task<List<T>> ListarTodosAsync(ISpecification<T> specification)
+        {
+            return await ApplySpecification(specification).ToListAsync();
+        }
+
         public async Task<T> ObterEntidadeComSpec(ISpecification<T> specification)
         {
            return await ApplySpecification(specification).FirstOrDefaultAsync();
@@ -47,6 +52,11 @@ namespace Infraestrutura.Data
         public void Deletar(T entidade)
         {
             _dataContext.Set<T>().Remove(entidade);
+        }
+
+        public async Task<T> ObterEntidadePeloId(int id)
+        {
+            return await _dataContext.Set<T>().FindAsync(id);
         }
     }
 }
